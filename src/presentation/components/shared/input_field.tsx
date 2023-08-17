@@ -4,7 +4,7 @@ import TextStyles from '../../styling/textstyles';
 import Colors from '../../styling/colors';
 
 interface CustomTextInputProps {
-  value: string;
+  value?: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
   secureTextEntry?: boolean;

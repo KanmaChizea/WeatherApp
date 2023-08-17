@@ -6,7 +6,8 @@ const Colors = {
     grey1: '#343434',
     grey2: '#676767',
     grey3: '#C4C4C4',
-    primary: '#FF007F'
+    primary: '#FF007F',
+    secondary:'#008080'
   };
   
   export default Colors;

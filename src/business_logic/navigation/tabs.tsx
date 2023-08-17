@@ -35,7 +35,7 @@ function MyTabs(){
     
         <Tab.Screen name="Home" component={HomeScreen}/>
         <Tab.Screen name="Favourites" component={FavouritesScreen} />
-        <Tab.Screen name="Accounts" component={AccountScreen} />
+        <Tab.Screen name="Account" component={AccountScreen} />
 
       </Tab.Navigator>
     );
