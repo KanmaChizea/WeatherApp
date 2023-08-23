@@ -5,30 +5,45 @@ import MyTabs from './tabs';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { selectUser, selectUserLoading} from '../redux/user/user';
+import { selectUserLoggedIn, selectUserLoading} from '../redux/user/user';
 import { initializeUser } from '../redux/user/thunk/initialize_user';
+import { NavigationContainer } from '@react-navigation/native';
+import { connect } from 'react-redux';
 
 const Stack = createStackNavigator();
 
 function MyStack() {
   const dispatch = useAppDispatch()
   const userIsLoading = useAppSelector(selectUserLoading);
-  const selectedUser = useAppSelector(selectUser);
+  const userIsLoggedIn = useAppSelector(selectUserLoggedIn);
+
+
+  const LoginStack =()=> {
+   return <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Welcome" component={WelcomeScreen}/>
+    </Stack.Navigator>
+  }
+  const AppStack =()=> {
+   return <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="WeatherApp" component={MyTabs}/>
+    </Stack.Navigator>
+  }
+
+  const init = async () => {
+   await dispatch(initializeUser());
+  }
 
   useEffect( ()=>{
-   dispatch(initializeUser())
-   
+   init()
   },[]);
 
   if (userIsLoading) {
     return <View/>;
   }
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={selectedUser === undefined ?  'Welcome' : 'WeatherApp' }>
-    <Stack.Screen name="WeatherApp" component={MyTabs} />
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
-    </Stack.Navigator>
-  );
+  return <NavigationContainer>
+    {userIsLoggedIn ? <AppStack/> : <LoginStack/> }
+  </NavigationContainer>;
 }
 
 export default MyStack;
+

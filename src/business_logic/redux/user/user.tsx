@@ -19,11 +19,12 @@ interface UserState {
     user?:User,
     error?:AppError,
     loading:boolean,
+    loggedIn:boolean,
 }
 export const initialState: UserState = {
     error:undefined,
     loading:false,
-     
+    loggedIn:false,     
 };
 
 
@@ -34,11 +35,12 @@ export const userSlice = createSlice({
     extraReducers:(builder)=>{
         builder.addCase(initializeUser.fulfilled, (state, action)=>{
             if(action.payload !== null){
-                 state.user = {name: action.payload };
+                 state.user = {name: action.payload};
+                 state.loggedIn = true;
                  state.loading = false;
                 } else {
                     state.loading = false;
-
+                    state.loggedIn = false;
                 }
         });
         builder.addCase(initializeUser.pending, (state,action)=>{
@@ -47,13 +49,11 @@ export const userSlice = createSlice({
         builder.addCase(initializeUser.rejected, (state,action)=>{
             state.loading = false;
             state.error = action.payload
+            
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.user = {name: action.payload.name}
             state.loading = false;
-        });
-        builder.addCase(loginUser.pending, (state,action)=>{
-            state.loading = true;
         });
         builder.addCase(loginUser.rejected, (state,action)=>{
             state.loading = false;
@@ -62,6 +62,7 @@ export const userSlice = createSlice({
         builder.addCase(logoutUser.fulfilled, (state, action) => {
             state.user = undefined;
             state.loading = false;
+            state.loggedIn = false;
         });
         builder.addCase(logoutUser.pending, (state,action)=>{
             state.loading = true;
@@ -71,17 +72,15 @@ export const userSlice = createSlice({
             state.error = action.payload
         });
         builder.addCase(updateUser.fulfilled, (state, action) => {
-            const newUser = {
-                name: action.payload.name ?? state.user?.name,
+            const newUser: User = {
+                name: action.payload.name ?? state.user!.name,
                 image: action.payload.image ?? state.user?.image,
             }
-            state.loading = false;
-        });
-        builder.addCase(updateUser.pending, (state,action)=>{
-            state.loading = true;
+            if(newUser != state.user){
+            state.user = newUser;
+            }
         });
         builder.addCase(updateUser.rejected, (state,action)=>{
-            state.loading = false;
             state.error = action.payload
         });
     }
@@ -89,7 +88,8 @@ export const userSlice = createSlice({
 
 export const selectUser =(state: RootState)=> state.user.user
 export const selectUserLoading =(state: RootState)=> state.user.loading
-export const selectUserError =(state: RootState)=> state.user.error 
+export const selectUserError =(state: RootState)=> state.user.error
+export const selectUserLoggedIn = (state: RootState)=> state.user.loggedIn
 
 
 

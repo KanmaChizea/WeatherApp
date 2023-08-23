@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import  user  from './user/user';
+import  userReducer  from './user/user';
 
 const middlewares: any[] =[];
 
@@ -10,9 +10,9 @@ const middlewares: any[] =[];
 
 export const store = configureStore({
     reducer:{ 
-        user
+        user:userReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck:false}).concat(middlewares),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck:false}),
 }
 )
 

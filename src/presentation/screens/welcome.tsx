@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import { Button, Dimensions, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { WelcomeScreenNavigationProp } from "../../business_logic/navigation/stack_types";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FilledButton from "../components/shared/button";
@@ -12,11 +12,10 @@ import { loginUser } from "../../business_logic/redux/user/thunk/login_user";
 import Snackbar from "react-native-snackbar";
 import Colors from "../styling/colors";
 
-function WelcomeScreen({navigation}: WelcomeScreenNavigationProp) : JSX.Element{
+function WelcomeScreen() : JSX.Element{
 
     const [name, useName] = useState<string>('');
     const isLoading = useAppSelector(selectUserLoading);
-    const user = useAppSelector(selectUser);
     const userError = useAppSelector(selectUserError);
     const [isActive, useIsActive] = useState<boolean>(false);
     const dispatch = useAppDispatch();
@@ -27,10 +26,8 @@ function WelcomeScreen({navigation}: WelcomeScreenNavigationProp) : JSX.Element{
                 text: userError.errorMessage,
                 backgroundColor: Colors.red
             });
-        } else if(user !== undefined){
-            navigation.navigate('WeatherApp');
-        }
-    }, [user,userError]);
+        } 
+    }, [userError]);
 
     return <SafeAreaView style= {{flex: 1}}>
         <TouchableWithoutFeedback 

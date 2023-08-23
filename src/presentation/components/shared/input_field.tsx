@@ -9,6 +9,7 @@ interface CustomTextInputProps {
   placeholder?: string;
   secureTextEntry?: boolean;
   errorMessage?: string;
+  defaultValue?: string;
 }
 
 const InputField = ({
@@ -17,6 +18,7 @@ const InputField = ({
   placeholder,
   secureTextEntry = false,
   errorMessage,
+  defaultValue
 }: CustomTextInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -38,6 +40,7 @@ const InputField = ({
             styles.inputFieldError,
           isFocused && styles.inputFieldFocused,
         ]}
+        defaultValue={defaultValue}
         onChangeText={onChangeText}
         value={value}
         placeholder={placeholder}
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
 
     borderRadius: 12,
-    fontSize: 14,
+    fontSize: 16,
   },
   inputFieldFocused: {
     height: 40,
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderRadius: 12,
-    fontSize: 14,
+    fontSize: 16,
   },
   inputFieldError: {
     height: 40,
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginBottom: 4,
     borderRadius: 12,
-    fontSize: 14,
+    fontSize: 16,
   },
 });
 

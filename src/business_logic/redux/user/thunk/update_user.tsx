@@ -10,7 +10,7 @@ export const updateUser = createAsyncThunk< UpdateUser, UpdateUser, {rejectValue
             await storeUsername(user.name, user.image);
            return thunkApi.fulfillWithValue({
             name:user.name,
-             image:user.image
+            image:user.image
             });
         } catch(e){
            return thunkApi.rejectWithValue(new AppError('Could not update user info'));

@@ -23,7 +23,7 @@ function MyTabs(){
           } else if (route.name === 'Favourites') {
             iconName = focused ? 'heart' : 'heart-outline';
           } 
-          else if(route.name === 'Accounts'){
+          else if(route.name === 'Account'){
             iconName = focused ? 'person':'person-outline';
           }
           return <Icon name={iconName} color={color} size = {size}/>;
@@ -36,7 +36,6 @@ function MyTabs(){
         <Tab.Screen name="Home" component={HomeScreen}/>
         <Tab.Screen name="Favourites" component={FavouritesScreen} />
         <Tab.Screen name="Account" component={AccountScreen} />
-
       </Tab.Navigator>
     );
   }
