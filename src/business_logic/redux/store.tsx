@@ -1,5 +1,6 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import  userReducer  from './user/user';
+import homeWeatherReducer from './weather/home_weather';
 
 const middlewares: any[] =[];
 
@@ -10,7 +11,8 @@ const middlewares: any[] =[];
 
 export const store = configureStore({
     reducer:{ 
-        user:userReducer
+        user:userReducer,
+        homeWeather:homeWeatherReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck:false}),
 }

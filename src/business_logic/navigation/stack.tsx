@@ -2,13 +2,13 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from '../../presentation/screens/welcome';
 import MyTabs from './tabs';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { View } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { selectUserLoggedIn, selectUserLoading} from '../redux/user/user';
 import { initializeUser } from '../redux/user/thunk/initialize_user';
 import { NavigationContainer } from '@react-navigation/native';
-import { connect } from 'react-redux';
+import { BrowseLocation } from '../../presentation/screens/browse_locations';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +26,7 @@ function MyStack() {
   const AppStack =()=> {
    return <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="WeatherApp" component={MyTabs}/>
+      <Stack.Screen name='BrowseLocation' component={BrowseLocation}/>
     </Stack.Navigator>
   }
 

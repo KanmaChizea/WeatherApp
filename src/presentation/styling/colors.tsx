@@ -7,7 +7,11 @@ const Colors = {
     grey2: '#676767',
     grey3: '#C4C4C4',
     primary: '#FF007F',
-    secondary:'#008080'
+    secondary:'#008080',
+    sunny:'#FFE142',
+    rain:'#FF64D4',
+    cloudy: '#42C6FF',
+
   };
   
   export default Colors;

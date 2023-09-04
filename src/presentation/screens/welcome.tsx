@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Dimensions, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { WelcomeScreenNavigationProp } from "../../business_logic/navigation/stack_types";
 import { SafeAreaView } from "react-native-safe-area-context";
-import FilledButton from "../components/shared/button";
+import {LongFilledButton }from "../components/shared/button";
 import InputField from "../components/shared/input_field";
 import TextStyles from "../styling/textstyles";
 import { WelcomeImage } from "../../../assets";
@@ -56,7 +56,7 @@ function WelcomeScreen() : JSX.Element{
                         
                         } }/>
                 </View>
-                <FilledButton
+                <LongFilledButton
                     label="Login"
                     isActive={isActive}
                     isLoading = {isLoading}

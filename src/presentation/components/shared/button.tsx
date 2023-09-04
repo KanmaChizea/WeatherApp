@@ -2,26 +2,56 @@ import React from 'react';
 import {ActivityIndicator, Dimensions, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Colors from '../../styling/colors';
 
-function FilledButton({onPress, label, isActive, isLoading}: {onPress: () => void, label: string, isActive:boolean, isLoading: boolean}): JSX.Element {
+export function LongFilledButton(props: {onPress: () => void, label: string, isActive:boolean, isLoading: boolean}): JSX.Element {
   return (
-    <TouchableOpacity activeOpacity={isActive ? 0.6 : 1.0} style={isActive ? styles.button : styles.buttonInactive} onPress={onPress}>
-   { isLoading ? <ActivityIndicator color={'white'}/> :  <Text style={ styles.buttonText}>{label}</Text>}
+    <TouchableOpacity activeOpacity={props.isActive ? 0.6 : 1.0} style={props.isActive ? styles.longFilledButton : styles.longFilledButtonInactive} onPress={props.onPress}>
+   { props.isLoading ? <ActivityIndicator color={'white'}/> :  <Text style={ styles.buttonText}>{props.label}</Text>}
+    </TouchableOpacity>
+  );
+}
+
+export function ShortFilledButton(props: {onPress: () => void, label: string, isActive:boolean, isLoading: boolean}): JSX.Element {
+  return (
+    <TouchableOpacity
+     activeOpacity={props.isActive ? 0.6 : 1.0} 
+     style={props.isActive 
+      ? styles.shortFilledButton 
+      : styles.shortFilledButtonInactive}
+    onPress={props.onPress}>
+   { props.isLoading 
+   ? <ActivityIndicator color={'white'}/> 
+   :  <Text style={ styles.buttonText}>{props.label}</Text>}
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
+  longFilledButton: {
     width: Dimensions.get('window').width - 32,
     backgroundColor: Colors.primary,
     borderRadius: 12,
     padding: 12,
   },
-  buttonInactive: {
+  longFilledButtonInactive: {
     width: Dimensions.get('window').width - 32,
     backgroundColor: Colors.grey3,
     borderRadius: 12,
     padding: 12,
+  },
+  shortFilledButton: {
+    paddingVertical: 12,
+        paddingHorizontal:36,
+        borderRadius: 20,
+        flexDirection: 'row',
+        backgroundColor:Colors.primary
+  },
+  shortFilledButtonInactive: {
+    paddingVertical: 12,
+        paddingHorizontal:36,
+        borderRadius: 20,
+        flexDirection: 'row',
+    backgroundColor: Colors.grey3,
+
   },
   buttonText: {
     fontSize: 16,
@@ -30,5 +60,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default FilledButton;
